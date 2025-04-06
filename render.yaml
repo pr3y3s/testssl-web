@@ -3,7 +3,5 @@ services:
     name: testssl-web
     env: python
     plan: free
-    buildCommand: |
-      apt-get update && apt-get install -y testssl
-      pip install -r requirements.txt
+    buildCommand: ""
     startCommand: python app.py

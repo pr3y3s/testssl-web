@@ -1,0 +1,125 @@
+/* style.css */
+
+/* Estilo para el cuerpo y centrado general */
+body {
+    display: flex; /* Activar Flexbox */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Altura completa de la ventana */
+    margin: 0; /* Eliminar márgenes del navegador */
+    background: linear-gradient(to right, #b4eab9, #feb47b); /* Fondo degradado de izquierda a derecha */
+    color: white; /* Texto claro */
+  }
+  
+  /* Contenedor principal */
+  .container {
+    text-align: center; /* Centrar el texto dentro del contenedor */
+    width: 300px; /* Definir ancho del contenedor */
+    opacity: 0; /* Al principio, el contenedor está invisible */
+    transform: translateY(30px); /* Desplazarlo hacia abajo */
+    animation: slideIn 1s ease-out forwards; /* Animación */
+    animation-delay: 0.2s; /* Retraso para la animación */
+  }
+
+/* Estilo para el título */
+.title {
+    color: #333;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Searcher */
+  .searcher {
+    margin-bottom: 20px; /* Separación con otros elementos */
+    opacity: 0; /* Inicialmente invisible */
+    transform: translateY(30px); /* Comienza desplazado */
+    animation: slideIn 1s ease-out forwards;
+    animation-delay: 0.5s; /* Retraso para que aparezca después del contenedor */
+  }
+
+  .input {
+    width: 60%; /* Asegurar que el input ocupe todo el ancho disponible */
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+
+/* Campo de selección */
+  .field {
+    margin-bottom: 20px;
+    opacity: 0; /* Inicialmente invisible */
+    transform: translateY(30px); /* Comienza desplazado */
+    animation: slideIn 1s ease-out forwards;
+    animation-delay: 0.7s; /* Retraso para que aparezca después del campo de búsqueda */
+  }
+  
+  .select select {
+    width: 100%; /* Asegurar que el select ocupe todo el ancho */
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+/* Botones */
+  .buttons {
+    display: flex; /* Activamos Flexbox para los botones */
+    justify-content: center; /* Centramos los botones horizontalmente */
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 20px; /* Separación superior */
+    opacity: 0; /* Inicialmente invisible */
+    transform: translateY(30px); /* Comienza desplazado */
+    animation: slideIn 1s ease-out forwards;
+    animation-delay: 1s; /* Retraso para que aparezca al final */
+  }
+  
+  .buttons .button {
+    margin: 5px; /* Espaciado entre botones */
+  }
+  
+
+/* Estilo para la sección */
+.section {
+    padding: 3rem 0;
+    align-items: center;
+}
+
+option {
+    color: black; /* Estilo para las opciones seleccionables */
+  }
+
+#resultado {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+
+.tabla {
+    border: hidden;
+    text-align: center;
+}
+
+.td {
+    vertical-align: text-bottom;
+    text-align: center;
+}
+
+.td-text {
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* Animación para el deslizamiento */
+@keyframes slideIn {
+    0% {
+      opacity: 0; /* Al principio está invisible */
+      transform: translateY(30px); /* Comienza desplazado hacia abajo */
+    }
+    100% {
+      opacity: 1; /* Al final es completamente visible */
+      transform: translateY(0); /* Vuelve a su posición original */
+    }
+  }
+  
+

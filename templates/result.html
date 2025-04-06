@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" style="background-color: #f0d9e2;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado del TestSSL</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                Resultado del análisis de certificado con TestSSL para 
+                <a href="{{ url if 'http' in url else 'https://' + url }}" target="_blank">{{ url }}</a>
+            </h1>
+            <p class="subtitle">
+                <a href="https://www.ccn-cert.cni.es/es/series-ccn-stic/800-guia-esquema-nacional-de-seguridad/513-ccn-stic-807-criptologia-de-empleo-en-el-ens/file?format=html">
+                    Guía CCN-STIC 221 Mecanismos Criptográficos autorizados
+                </a>
+            </p>
+
+            <!-- Sección de análisis del certificado en un prompt -->
+            <div class="prompt-container">
+                <div class="column is-half">
+                    <div class="box">
+                        <h2 class="subtitle">Análisis de Certificado</h2>
+                        <div class="prompt-container">
+                            <textarea class="prompt" readonly>
+Firma del certificado: {{ certificate_analysis[0] }}
+Descripción de curva de certificado: {{ certificate_analysis[1] }}
+Fingerprint hash: {{ certificate_analysis[2] }}
+Verification: {{ certificate_analysis[3] }}
+Fecha de expiración: {{ certificate_analysis[4] }}
+                            </textarea>
+                            <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="/" class="button is-primary">Realizar otro test</a>
+        </div>
+    </section>
+
+    <script>
+        function copyToClipboard(button) {
+            const textarea = button.previousElementSibling;
+            textarea.select();
+            document.execCommand('copy');
+            button.textContent = 'Copiado!';
+            setTimeout(() => button.textContent = 'Copiar', 1500);
+        }
+    </script>
+</body>
+</html>
+
+
+

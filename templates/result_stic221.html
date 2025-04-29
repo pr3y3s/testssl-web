@@ -17,6 +17,46 @@
                 </a>
             </p>
             <div class="prompt-container">
+                {% if curves_validated %}
+                    <div class="column is-half">
+                        <div class="box">
+                            <h2 class="subtitle">
+                                EC Validadas
+                                <img class="check-logo" src="{{ url_for('static', filename='images/check.png') }}" alt="Check Icon";>
+                            </h2>
+                            <div class="prompt-container">
+                                <textarea class="prompt" readonly>
+{% for curve, recommendation in curves_validated %}
+{{ curve }} ({{ recommendation }})
+{% endfor %}
+                                </textarea>                                    
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div> 
+            <div class="prompt-container">
+                {% if curves_deprecated %}
+                    <div class="column is-half">
+                        <div class="box">
+                            <h2 class="subtitle">
+                                EC No Validadas
+                                <img class="check-logo" src="{{ url_for('static', filename='images/notcheck.png') }}" alt="Not Check Icon";>
+                            </h2>
+                            <div class="prompt-container">
+                                <textarea class="prompt" readonly>
+{% for curve in curves_deprecated %}
+{{ curve }}
+{% endfor %}
+                                </textarea>                                    
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="prompt-container">
                 {% if tls_13_validated %}
                     <div class="column is-half">
                         <div class="box">

@@ -60,13 +60,9 @@ def execute_testssl(url, option):
     # Comando testssl
     if option in ['stic221', 'stic807']:
         # Ejecutamos el comando testssl y redirigimos la salida al archivo temporal
-        subprocess.run(
-            ["testssl", "--csv", "--mapping", "iana", "-E", "-f", url],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL
-        )
+        os.system(f"testssl --csv --mapping iana -E {url} > /dev/null 2>&1")
     else:
-        subprocess.run(f"testssl --csv -S {url} > 2>&1", shell=True)
+        os.system(f"testssl --csv -S {url} > /dev/null 2>&1")
 
 def find_file(url):
     """

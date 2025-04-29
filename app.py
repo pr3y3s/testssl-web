@@ -1,9 +1,3 @@
-# Windows environment: python -m venv [name env]
-# RESTRICTED MODE OFF: Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass. Permanente: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-# .venv\Scripts\activate en Windows o source venv/bin/activate
-# python app.py
-# Buscamos: http://127.0.0.1:5000/
-
 from flask import Flask, render_template, request
 from datetime import datetime
 import tempfile
@@ -54,7 +48,7 @@ def execute_testssl(url, option):
         # Comando testssl
         if option in ['stic221', 'stic807']:
             # Ejecutamos el comando testssl y redirigimos la salida al archivo temporal
-            subprocess.run(f"testssl --csv --mapping iana -E {url} > {csv_file_path} 2>&1", shell=True)
+            subprocess.run(f"testssl --csv --mapping iana -E -f {url} > {csv_file_path} 2>&1", shell=True)
         else:
             subprocess.run(f"testssl --csv -S {url} > {csv_file_path} 2>&1", shell=True)
 
@@ -155,7 +149,7 @@ def csv_analysis(file, analysis_option):
         filtered_13 = filter_tls_elements(ciphersuites_tls_13, 3)
         filtered_curves = filter_curves(curves)
 
-        validated_12, deprecated_12, validated_13, deprecated_13, validated_curves = sql_extract(filtered_12, filtered_13, filtered_curves, analysis_option)
+        validated_12, deprecated_12, validated_13, deprecated_13, validated_curves, deprecated_curves = sql_extract(filtered_12, filtered_13, filtered_curves, analysis_option)
         return filtered_10, filtered_11, validated_12, deprecated_12, validated_13, deprecated_13, validated_curves
 
 def sql_extract(ciphersuites12, ciphersuites13, curves, analysis_option):
@@ -176,6 +170,7 @@ def sql_extract(ciphersuites12, ciphersuites13, curves, analysis_option):
     validated_ciphersuites13 = []
     deprecated_ciphersuites13 = []
     validated_curves = []
+    deprecated_curves = []
 
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
@@ -208,10 +203,12 @@ def sql_extract(ciphersuites12, ciphersuites13, curves, analysis_option):
     for curve in curves:
         if curve in ccn_curves:
             validated_curves.append((curve, ccn_curves[curve]))
+        else:
+            deprecated_curves.append(curve)
 
     cursor.close()
     conn.close()
-    return validated_ciphersuites12, deprecated_ciphersuites12, validated_ciphersuites13, deprecated_ciphersuites13, validated_curves
+    return validated_ciphersuites12, deprecated_ciphersuites12, validated_ciphersuites13, deprecated_ciphersuites13, validated_curves, deprecated_curves
 
 def filter_curves(curves):
     """
@@ -277,12 +274,13 @@ def perform_test():
             certificate_analysis = csv_analysis(csv_file, analysis_option)
             return render_template('result.html', url=url_to_analyze, certificate_analysis=certificate_analysis)
         elif analysis_option in ['stic221', 'stic807']:
-            tls_10_filtered, tls_11_filtered, tls_12_validated, tls_12_deprecated, tls_13_validated, tls_13_deprecated, curves_validated = csv_analysis(csv_file, analysis_option)
+            tls_10_filtered, tls_11_filtered, tls_12_validated, tls_12_deprecated, tls_13_validated, tls_13_deprecated, curves_validated, curves_deprecated = csv_analysis(csv_file, analysis_option)
             template = 'result_stic221.html' if analysis_option == 'stic221' else 'result_stic807.html'
             return render_template(template, url=url_to_analyze,
                                    tls_10_filtered=tls_10_filtered, tls_11_filtered=tls_11_filtered,
                                    tls_12_validated=tls_12_validated, tls_12_deprecated=tls_12_deprecated,
-                                   tls_13_validated=tls_13_validated, tls_13_deprecated=tls_13_deprecated, timestamp=datetime.now())
+                                   tls_13_validated=tls_13_validated, tls_13_deprecated=tls_13_deprecated,
+                                   curves_validated=curves_validated, curves_deprecated=curves_deprecated, timestamp=datetime.now())
     else:
         return f"No se encontró ningún archivo CSV para la URL: {url_to_analyze}"
 

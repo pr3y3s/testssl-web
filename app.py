@@ -57,11 +57,14 @@ def execute_testssl(url, option):
         url (str): The URL of the website to analyze.
         option (str): The analysis option.
     """
-
         # Comando testssl
         if option in ['stic221', 'stic807']:
             # Ejecutamos el comando testssl y redirigimos la salida al archivo temporal
-            subprocess.run(f"testssl --csv --mapping iana -E -f {url} > 2>&1", shell=True)
+            subprocess.run(
+                ["testssl", "--csv", "--mapping", "iana", "-E", "-f", url],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
+            )
         else:
             subprocess.run(f"testssl --csv -S {url} > 2>&1", shell=True)
 

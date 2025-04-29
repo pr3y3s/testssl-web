@@ -168,7 +168,7 @@ def csv_analysis(file, analysis_option):
         filtered_curves = filter_curves(curves)
 
         validated_12, deprecated_12, validated_13, deprecated_13, validated_curves, deprecated_curves = sql_extract(filtered_12, filtered_13, filtered_curves, analysis_option)
-        return filtered_10, filtered_11, validated_12, deprecated_12, validated_13, deprecated_13, validated_curves
+        return filtered_10, filtered_11, validated_12, deprecated_12, validated_13, deprecated_13, validated_curves, deprecated_curves
 
 def sql_extract(ciphersuites12, ciphersuites13, curves, analysis_option):
     """

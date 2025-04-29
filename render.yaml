@@ -2,5 +2,6 @@ services:
   - type: web
     name: testssl-web
     env: python
+    plan: free
     buildCommand: ""
-    startCommand: gunicorn app:app
+    startCommand: python app.py

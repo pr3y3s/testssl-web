@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request
 from datetime import datetime
-import tempfile
-import subprocess
 import os
+import subprocess
+import tempfile
 import csv
 import glob
 import sqlite3
@@ -17,6 +17,22 @@ CERT_TERMS = [
     "cert_caIssuers"
 ]
 
+def load_mapping(filename):
+    """
+    Loads the ciphersuite mapping from a text file.
+
+    Args:
+        filename (str): The name of the file containing the mapping.
+
+    Returns:
+        dict: A dictionary with the ciphersuite mappings.
+    """
+    mapping = {}
+    with open(filename, 'r') as file:
+        for line in file:
+            key, value = line.strip().split()
+            mapping[key] = value
+    return mapping
 
 def find_file(url):
     """
@@ -41,6 +57,7 @@ def execute_testssl(url, option):
         url (str): The URL of the website to analyze.
         option (str): The analysis option.
     """
+
     # Crear un archivo temporal para guardar el resultado CSV
     with tempfile.NamedTemporaryFile(delete=False, mode='w', newline='', suffix='.csv') as temp_file:
         csv_file_path = temp_file.name  # Almacenamos la ruta del archivo temporal
@@ -60,6 +77,7 @@ def find_file(url):
     Since we are now returning the path of the temp file, this function is no longer needed.
     """
     return None  # Ya no lo necesitamos
+
 
 def extract_ciphersuite(elements):
     """
@@ -266,8 +284,8 @@ def perform_test():
     url_to_analyze = request.form['url']
     analysis_option = request.form['analysis_option']
 
-    # Ejecutamos el testssl y obtenemos la ruta del archivo CSV temporal
-    csv_file = execute_testssl(url_to_analyze, analysis_option)
+    execute_testssl(url_to_analyze, analysis_option)
+    csv_file = find_file(url_to_analyze)
 
     if csv_file:
         if analysis_option == 'completo':

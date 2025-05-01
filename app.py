@@ -245,7 +245,7 @@ def filter_curves(curves):
     }
     cleaned_curves = []
     for item in curves:
-        curves_list = item.split()[4]
+        curves_list = item.split()
         normalized_curves = [mapping.get(curve, curve) for curve in curves_list]
         cleaned_curves.extend(normalized_curves)
     return cleaned_curves

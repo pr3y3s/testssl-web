@@ -29,7 +29,7 @@ pip install -r requirements.txt
 
 ## Runing the App locally
 ```bash
-python app.py
+python3 app.py
 ```
 Then open your browser at http://localhost:5000
 

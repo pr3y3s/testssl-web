@@ -209,7 +209,7 @@ def filter_curves(curves):
     mapping = {
         "prime256v1": "secp256r1",
         "prime384v1": "secp384r1",
-        "prime521v1": "secp526r1",
+        "prime521v1": "secp521r1",
         "X25519": "Curve25519",
         "X448": "Curve448"
     }

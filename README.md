@@ -16,6 +16,7 @@
 - Python 3.8+
 - pip
 - testssl.sh
+- Ubuntu / Linux environment
 
 ## Installation for instant deployment
 

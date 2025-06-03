@@ -1,6 +1,8 @@
 # testssl-web
 
-**TestSSL Web** is a web-based tool built with Flask to perform SSL analysis and testing. It provides a simple interface to run checks and display results in the browser.
+**TestSSL Web** is a web-based tool built with Flask to perform SSL analysis and testing based on Spanish' methodologies. It provides a simple interface to run checks and display results in the browser.
+
+**User Disclaimer**: The results are automatically filtered by CCN-STIC-807 and CCN-STIC-221.
 
 ## Features
 

@@ -10,7 +10,10 @@
 <body>
     <section class="section">
         <div class="container">
-            <h1 class="title">Resultado del TestSSL para <a href="{{ url }}">{{ url }}</a></h1>
+            <h1 class="title">
+                Resultado del TestSSL para 
+                <a href="{{ url if 'http' in url else 'https://' + url }}" target="_blank">{{ url }}</a>
+            </h1>
             <p class="subtitle">
                 <a href="https://www.ccn-cert.cni.es/es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/6954-ccn-stic-221-guia-de-mecanismos-criptograficos-autorizados-por-el-ccn-1/file?format=html">
                     Guía CCN-STIC 221 Mecanismos Criptográficos autorizados

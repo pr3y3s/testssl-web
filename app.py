@@ -175,7 +175,7 @@ def sql_extract(ciphersuites12, ciphersuites13, curves, analysis_option):
         ccn_curves = {row[0]: row[1] for row in cursor.fetchall()}
 
     for suite in ciphersuites12:
-        if suite in ccn_ciphers_12:
+        if suite in ccn_ciphers_12 and ccn_ciphers_12[suite]!='NR':
             validated_ciphersuites12.append((suite, ccn_ciphers_12[suite]))
         else:
             deprecated_ciphersuites12.append(suite)

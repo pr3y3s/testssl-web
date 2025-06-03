@@ -13,8 +13,9 @@
 
 - Python 3.8+
 - pip
+- testssl.sh
 
-## Installation
+## Installation for instant deployment
 
 Clone the repository:
 
@@ -22,15 +23,12 @@ Clone the repository:
 git clone https://github.com/pr3y3s/testssl-web.git
 cd testssl-web
 ```
-Install all dependencies:
-```bash
-pip install -r requirements.txt
-```
 
-## Runing the App locally
+Runing the App locally
 ```bash
 python3 app.py
 ```
+
 Then open your browser at http://localhost:5000
 
 ## LICENSE

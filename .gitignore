@@ -1,1 +1,3 @@
 copy/
+venv/
+__pycache__/

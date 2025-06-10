@@ -27,8 +27,23 @@
                         <h2 class="subtitle">Análisis de Certificado</h2>
                         <div class="prompt-container">
                             <textarea class="prompt" readonly>
-Firma del certificado: {{ certificate_analysis[0] }}
-Descripción de curva de certificado: {{ certificate_analysis[1] }}
+{% set signature_line = certificate_analysis[0] %}
+{% if 'SHA128' in signature_line or signature_line == 'Firma del certificado: SHA' %}
+Firma del certificado: SHA256 (H){{ signature_line.split('SHA')[-1] }}
+{% elif 'SHA256' in signature_line or 'SHA384' in signature_line %}
+Firma del certificado: SHA384 (R){{ signature_line.split('SHA')[-1] }}
+{% else %}
+{{ signature_line }}
+{% endif %}
+
+{% set curve_line = certificate_analysis[1] %}
+{% if '1024' in curve_line or '2048' in curve_line %}
+Descripción de curva de certificado: RSA 2048 bits (H) (exponent is 65537)
+{% elif '3072' in curve_line %}
+Descripción de curva de certificado: RSA 2048 bits (R) (exponent is 65537)
+{% else %}
+{{ curve_line }}
+{% endif %}
 Fingerprint hash: {{ certificate_analysis[2] }}
 Verification: {{ certificate_analysis[3] }}
 Fecha de expiración: {{ certificate_analysis[4] }}

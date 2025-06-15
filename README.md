@@ -32,7 +32,9 @@ Runing the App locally
 python3 app.py
 ```
 
-Then open your browser at http://localhost:5000
+Then open your browser at http://localhost:5000 and type the URL to be analyzed!
+
+⚠️ Note: This tool has some sensitive to the input URL. Please, note that the URL must be introduced without "https://" or withouth any slash (/) at the end of the chaintext.
 
 ## LICENSE
 This project is for educational and personal use. Not intended for commercial deployment :D.

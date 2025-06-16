@@ -8,7 +8,7 @@ html, body {
 }
 
 .section {
-    min-height: 100vh; /* Ocupa toda la pantalla */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,7 +29,7 @@ html, body {
     margin-top: 2rem;
 }
 
-/* Container gris del prompt */
+/* Container gris del prompt (ubicación más sencilla en este código) */
 .box {
     display: flex;
     align-items: center;
@@ -47,10 +47,10 @@ html, body {
     justify-content: center;
     flex-direction: column;
     gap: 14px;
-    /*align-items: center;*/
+
 }
 
-/* Donde aparecen las ciphersuites listadas */
+/* Donde aparecen las ciphersuites listadas (ubicación sencilla) */
 .prompt { 
     width: 600px;
     height: 300px;

@@ -1,5 +1,5 @@
 /* style.css */
-
+/* Este es el código principal de CSS. Se ha usado como base para 'results.css', por eso en ese no aparecen los mismos comentarios */
 /* Estilo para el cuerpo y centrado general */
 body {
     display: flex; /* Activar Flexbox */

@@ -31,6 +31,19 @@ Runing the App locally
 ```bash
 python3 app.py
 ```
+⚠️ Note: The file "requirements.txt" is not mandatory to follow with the execution. If any of the previous steps throws an error or the app does not work, please, install the requirements:
+```bash
+python -m venv venv
+```
+```bash
+source venv/bin/activate
+```
+```bash
+pip install requirements.txt
+```
+```bash
+python3 app.py
+```
 
 Then open your browser at http://localhost:5000 and type the URL to be analyzed!
 

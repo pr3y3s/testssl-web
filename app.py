@@ -23,9 +23,7 @@ def execute_testssl(url, option):
         url (str): The URL of the website to analyze.
         option (str): The analysis option.
     """
-    # Comando testssl
     if option in ['stic221', 'stic807']:
-        # Ejecutamos el comando testssl y redirigimos la salida al archivo temporal
         os.system(f"testssl --csv --mapping iana -E -f {url} > /dev/null 2>&1")
     else:
         os.system(f"testssl --csv -S {url} > /dev/null 2>&1")
